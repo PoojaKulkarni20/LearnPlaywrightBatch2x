@@ -324,6 +324,16 @@ LearnPlaywrightBatch2x/
 │   ├── playwright.config.ts            # defineConfig — testDir, headless:false, html reporter, trace
 │   └── package.json                    # @playwright/test dependency
 │
+├── chaptet_20_Typescript_Basics/       ✅ TypeScript Basics — ES modules, export / import
+│   ├── utils.js                        # named exports — BASE_URL, formatTestName
+│   ├── testutils.js                    # named exports — BASE_URL, formatUpperCaseString
+│   ├── logger.js                       # default export (log) + named export (log2)
+│   └── EXPORT_IMPORT/
+│       ├── 168_EXPORT_IMPORT.js        # export keyword intro
+│       ├── 169_Utils.js                # named imports + `as` alias for name clashes
+│       ├── 170_Logger.js               # default import — no braces, any name
+│       └── ExplainDefault.md           # deep-dive: default vs non-default exports
+│
 └── README.md                           👋 You are here
 ```
 
@@ -4145,6 +4155,81 @@ npx playwright codegen https://app.thetestingacademy.com/playwright/ttacart/  # 
 
 ---
 
+## 📖 What's in Chapter 20 — TypeScript Basics: Export / Import (Available Now)
+
+The entry point to **ES modules** — how one file shares code and another consumes it. Master `export` / `import` here and every Page Object, fixture, and util file in later chapters reads cleanly.
+
+### Files
+
+| File | Topic | What you'll learn |
+|------|-------|-------------------|
+| `utils.js` | Named exports | `export let BASE_URL`, `export function formatTestName` |
+| `testutils.js` | Named exports | A second module exporting its own `BASE_URL` — sets up a name clash |
+| `logger.js` | Default + named | `export default function log` alongside a named `export function log2` |
+| `EXPORT_IMPORT/169_Utils.js` | Named imports | `import { BASE_URL as bul_util }` — braces + `as` alias to dodge clashes |
+| `EXPORT_IMPORT/170_Logger.js` | Default import | `import log from ...` — no braces, name is yours to pick |
+| `EXPORT_IMPORT/ExplainDefault.md` | Reference | Side-by-side default vs non-default export rules |
+
+### Concept
+
+**Concept:** A module exposes code two ways — **named exports** (`export`, many per file, imported by exact name in `{ }`) and a single **default export** (`export default`, imported with no braces under any name you choose).
+
+**Why:** Without modules everything lives in one global soup. `export`/`import` give explicit boundaries — you import only what you need, and the compiler catches typos in names.
+
+**Q&A — why use this?**
+- **Q: Braces or no braces?** A: Named imports need `{ }` and must match the exported name. The default import takes no braces and you name it whatever you want.
+- **Q: Two files both export `BASE_URL` — collision?** A: Alias one with `as`: `import { BASE_URL as bul_util } from "../utils.js"`. Both bindings coexist.
+- **Q: How many defaults per file?** A: Exactly one. You can mix it with as many named exports as you like (see `logger.js`).
+
+```mermaid
+flowchart TD
+    Q{What kind of export?} -->|many helpers| N["export function foo"]
+    Q -->|the module's main thing| D["export default log"]
+    N --> NI["import &#123; foo, bar as baz &#125; from '...'"]
+    D --> DI["import anyName from '...'"]
+    NI --> R[Used in consumer file]
+    DI --> R
+    style D fill:#e8f5e9,stroke:#2e7d32
+    style N fill:#e3f2fd,stroke:#1565c0
+```
+
+```js
+// utils.js — named exports (many allowed)
+export let BASE_URL = "https://api.staging.com";
+export function formatTestName(name) {
+  return "TC_" + name.toUpperCase();
+}
+
+// logger.js — one default + one named
+export default function log(message) {
+  console.log("[LOG] - default " + message);
+}
+export function log2(message) {
+  console.log("[LOGS] " + message);
+}
+
+// 169_Utils.js — named imports, `as` alias to avoid BASE_URL clash
+import { BASE_URL as bul_util, formatTestName } from "../utils.js";
+import { BASE_URL as bul_testtul } from "../testutils.js";
+console.log(formatTestName("login")); // TC_LOGIN
+
+// 170_Logger.js — default import, no braces, name is yours
+import log from "../logger.js";
+log("starting the test cases"); // [LOG] - default starting the test cases
+```
+
+### Run them
+
+```bash
+cd chaptet_20_Typescript_Basics
+node EXPORT_IMPORT/169_Utils.js     # named imports + alias
+node EXPORT_IMPORT/170_Logger.js    # default import
+```
+
+> 📄 Full breakdown: [`EXPORT_IMPORT/ExplainDefault.md`](chaptet_20_Typescript_Basics/EXPORT_IMPORT/ExplainDefault.md)
+
+---
+
 ## 🔭 What's Coming Next
 
 ```mermaid
@@ -4152,7 +4237,8 @@ graph TD
     subgraph next["Next Up — Playwright Basics"]
         N1[Ch 17: Promises ✅] --> N2[Ch 18: Async / Await ✅]
         N2 --> N3[Ch 19: Playwright Basics ✅]
-        N3 --> N4[Ch 20: Locators & POM]
+        N3 --> N4[Ch 20: TS Export / Import ✅]
+        N4 --> N5[Ch 21: Locators & POM]
     end
 
     style next fill:#fff3e0,stroke:#e65100
@@ -4178,6 +4264,7 @@ graph TD
 - ✅ Chapter 17 — **Promises**: `new Promise` (resolve/reject), `.then`/`.catch`/`.finally`, chaining to flatten callback hell, `Promise.all` vs `allSettled`, IQ traps (`throw` in `.then`, settle order) (files `154`–`160`)
 - ✅ Chapter 18 — **Async / Await**: `async`/`await` as sugar over promises, `try/catch/finally` error handling, flat E2E awaits vs `.then()` chains, sequential vs parallel (`Promise.allSettled`), first real Playwright tests (files `161`–`167`)
 - ✅ Chapter 19 — **Playwright Basics**: first real PW project — `playwright.config.ts`, the built-in `page` fixture, `page.goto` + `toHaveTitle`, a `codegen`-recorded login flow (`fill`/`click`/`toBeVisible`/`toContainText`/`toMatchAriaSnapshot`)
+- ✅ Chapter 20 — **TypeScript Basics (Export / Import)**: ES modules — named vs default exports, `import { x as alias }` for name clashes, default import with no braces, mixing default + named in one file (`utils.js`/`testutils.js`/`logger.js` + `ExplainDefault.md`)
 - ✅ **Per-chapter README** — every chapter folder now has its own deep-dive README.md
 
 ---
