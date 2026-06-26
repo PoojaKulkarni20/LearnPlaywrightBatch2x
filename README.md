@@ -324,23 +324,68 @@ LearnPlaywrightBatch2x/
 │   ├── playwright.config.ts            # defineConfig — testDir, headless:false, html reporter, trace
 │   └── package.json                    # @playwright/test dependency
 │
-├── chaptet_20_OOPs_Basics/             ✅ OOP Basics — ES modules + classes & objects
+├── chapter_20_Export_Import/           ✅ Export / Import (ES modules)
 │   ├── utils.js                        # named exports — BASE_URL, formatTestName
 │   ├── testutils.js                    # named exports — BASE_URL, formatUpperCaseString
 │   ├── logger.js                       # default export (log) + named export (log2)
-│   ├── 01_EXPORT_IMPORT/
-│   │   ├── 168_EXPORT_IMPORT.js        # export keyword intro
-│   │   ├── 169_Utils.js                # named imports + `as` alias for name clashes
-│   │   ├── 170_Logger.js               # default import — no braces, any name
-│   │   └── ExplainDefault.md           # deep-dive: default vs non-default exports
-│   └── 02_CLASS_OBJECT/
-│       ├── 171_Class_Object.js         # class shape — attributes + behaviour
-│       ├── 172_Class_Object2.js        # constructor fires on `new`, object reference
-│       ├── 173_Car.js                  # parameterised constructor + `this`
-│       ├── 174_REAL_Browser.js         # TestCase class — method vs function
-│       ├── 175_IQ.js                    # param constructor, per-object state
-│       ├── 176_Private_Public.js       # `#private` fields vs public
-│       └── 177_Statis.js / 178_Statis.js  # static fields & methods (class-level)
+│   └── 01_EXPORT_IMPORT/
+│       ├── 168_EXPORT_IMPORT.js        # export keyword intro
+│       ├── 169_Utils.js                # named imports + `as` alias for name clashes
+│       ├── 170_Logger.js               # default import — no braces, any name
+│       └── ExplainDefault.md           # deep-dive: default vs non-default exports
+│
+├── chapter_21_Classes_and_Objects/     ✅ OOP — class blueprint, new, constructor
+│   ├── 171_Class_Object.js             # class shape — attributes + behaviour
+│   ├── 172_Class_Object2.js            # constructor fires on `new`, object reference
+│   ├── 173_Car.js                      # parameterised constructor + `this`
+│   ├── 174_REAL_Browser.js             # TestCase class — method vs function
+│   ├── 175_IQ.js                        # param constructor, per-object state
+│   ├── 176_Private_Public.js           # `#private` fields vs public
+│   └── 177_Statis.js / 178_Statis.js   # static fields & methods (class-level)
+│
+├── chapter_22_Encapsulation/           ✅ OOP — hide state behind getter/setter gates
+│   ├── 179_Ecap.js                     # #balance hidden, deposit/getBalance gate it
+│   ├── 180_REAK_EXAMPLE.js             # getter/setter for #private fields
+│   ├── 181_Ecap_Car.js                 # get/setEngine controlled access
+│   └── 182_ECap_Bank.js                # setter guard — only cashier can mutate
+│
+├── chapter_23_Inheritance/             ✅ OOP — extends, super(), override, POM
+│   ├── 183_Single_Inheritance.js       # extends — child reuses parent methods
+│   ├── 184_SI_Example.js               # super(name) calls parent constructor
+│   ├── 185_Single_Inheritance_Con.js   # override — child setup wins
+│   ├── 186_IQ.js                       # super.method() calls parent's version
+│   ├── 187_IQ2.js                      # one loop, many subclasses (polymorphism)
+│   ├── 188_REAL_PageObject_Model.js    # BasePage -> Login/Dashboard/Cart
+│   ├── 189_Multiple_Inheritance.js     # JS forbids extends A, B
+│   ├── 190_Multiple_Level_Inheritance.js  # Base -> Auth -> Admin
+│   └── 191_Hierarchial_Inheritance.js  # one parent, many children
+│
+├── chapter_24_Polymorphism/            ✅ OOP — method overriding, many forms
+│   └── 192_Method_Overriding.js        # same setup(), subclass redefines it
+│
+├── chapter_25_OOP_Interview_Questions/ ✅ OOP drills — fields, defaults, this, chaining
+│   ├── EX1.js                          # Bug class — fields + display()
+│   ├── EX2.js                          # constructor default values
+│   ├── EX3.js                          # `this` per object
+│   └── EX4.js                          # method chaining — return this
+│
+├── chapter_26_Typescript/              ✅ TypeScript — type annotations, primitives, void/never
+│   ├── 193_TS.js                       # plain JS — no types (the "before")
+│   ├── 194_TS_HelloWorld.ts            # first .ts — `let x: string`, typed params + return
+│   ├── 195_TS_Part1.ts                 # `: void` function
+│   ├── 196_TS_Part2.ts                 # primitives, arrays, any vs unknown
+│   ├── 197_TS_Part2.ts                 # unknown narrowing, arrow + object annotations
+│   ├── 198_Part3.ts                    # void vs never (throw / infinite loop)
+│   ├── 199_IQ.ts                       # typed helpers — string/number/boolean/void
+│   └── 200_IQ.ts                       # typed array filter — number[] in/out
+│
+├── chapter_27_TypeScript_Interface/    ✅ TypeScript — interfaces, optional, readonly
+│   ├── 201_IF.ts                       # interface shape — object must match
+│   ├── 202_IF_Part2.ts                 # optional `?` properties
+│   ├── 203_IF_READONLY.ts              # readonly + optional combined
+│   └── 204_IF_READOnly.ts              # readonly fields + readonly arrays
+│
+├── tsconfig.json                       ⚙️  TS compiler config (strict, nodenext, esnext)
 │
 └── README.md                           👋 You are here
 ```
@@ -4163,13 +4208,9 @@ npx playwright codegen https://app.thetestingacademy.com/playwright/ttacart/  # 
 
 ---
 
-## 📖 What's in Chapter 20 — OOP Basics: Modules + Classes & Objects (Available Now)
+## 📖 What's in Chapter 20 — Export / Import (Available Now)
 
-Two parts. **Part 1** — ES modules (`export` / `import`), the foundation for sharing code across files. **Part 2** — classes & objects, the heart of OOP: blueprints, `new`, constructors, `this`, `#private` fields, and `static` members. Together they're the spine of every Page Object you'll write later.
-
-### Part 1 — Export / Import (`01_EXPORT_IMPORT/`)
-
-The entry point to **ES modules** — how one file shares code and another consumes it.
+The entry point to **ES modules** — how one file shares code and another consumes it. Master `export` / `import` here and every Page Object, fixture, and util file in later chapters reads cleanly.
 
 | File | Topic | What you'll learn |
 |------|-------|-------------------|
@@ -4231,14 +4272,18 @@ log("starting the test cases"); // [LOG] - default starting the test cases
 ### Run them
 
 ```bash
-cd chaptet_20_OOPs_Basics
+cd chapter_20_Export_Import
 node 01_EXPORT_IMPORT/169_Utils.js     # named imports + alias
 node 01_EXPORT_IMPORT/170_Logger.js    # default import
 ```
 
-> 📄 Full breakdown: [`01_EXPORT_IMPORT/ExplainDefault.md`](chaptet_20_OOPs_Basics/01_EXPORT_IMPORT/ExplainDefault.md)
+> 📄 Full breakdown: [`chapter_20_Export_Import/01_EXPORT_IMPORT/ExplainDefault.md`](chapter_20_Export_Import/01_EXPORT_IMPORT/ExplainDefault.md)
 
-### Part 2 — Classes & Objects (`02_CLASS_OBJECT/`)
+---
+
+## 📖 What's in Chapter 21 — Classes & Objects (Available Now)
+
+The heart of OOP — a **class** is a blueprint, an **object** is one instance built with `new`. Constructors seed `this`, `#private` hides data, `static` lives on the class.
 
 | File | Topic | What you'll learn |
 |------|-------|-------------------|
@@ -4313,9 +4358,266 @@ console.log(Student.mentor_name);   // call on the class, not an instance
 ### Run them
 
 ```bash
-node 02_CLASS_OBJECT/173_Car.js          # blueprint + constructor
-node 02_CLASS_OBJECT/176_Private_Public.js  # #private fields
-node 02_CLASS_OBJECT/177_Statis.js       # static members
+node 173_Car.js          # blueprint + constructor
+node 176_Private_Public.js  # #private fields
+node 177_Statis.js       # static members
+```
+
+---
+
+## 📖 What's in Chapter 22 — Encapsulation (Available Now)
+
+Hide internal data behind `#private` fields, expose it only through methods. The object guards its own state.
+
+| File | Topic | What you'll learn |
+|------|-------|-------------------|
+| `179_Ecap.js` | Hide state | `#balance` is private; `deposit()` / `getBalance()` are the only doors |
+| `180_REAK_EXAMPLE.js` | Getter / setter | Read `#child1` via `getChild1()`, change via `setChild1()` |
+| `181_Ecap_Car.js` | Controlled access | `getEngine` / `setEngine` wrap a private `#engine` |
+| `182_ECap_Bank.js` | Guarded setter | `setBalance` mutates only when `isCashier` — validation on write |
+
+**Concept:** Encapsulation = hide internal data behind `#private` fields and expose it only through methods (getters/setters). The object guards its own state.
+
+**Why:** Outside code can't corrupt internals. A setter can validate (`if (amount > 0)`, `if (isCashier)`) before allowing a change — impossible if the field were public.
+
+**Q&A — why use this?**
+- **Q: Difference from just using `#`?** A: `#` is the mechanism; encapsulation is the pattern — private field + public method gate. The method is where rules live.
+- **Q: Why a setter instead of a public field?** A: A setter can reject bad input. `182_ECap_Bank.js` blocks non-cashiers from changing the balance.
+- **Q: Where in testing?** A: A Page Object hides its locators (`#usernameField`) and exposes `login()` — callers can't fiddle with selectors.
+
+```mermaid
+flowchart LR
+    Caller -->|deposit&#40;100&#41;| M[public method]
+    Caller -.->|"account.#balance ❌"| X[blocked]
+    M -->|validates then writes| P["#balance (private)"]
+    M -->|getBalance&#40;&#41;| Caller
+    style P fill:#ffebee,stroke:#c62828
+    style X fill:#ffebee,stroke:#c62828
+```
+
+```js
+// 182_ECap_Bank.js — setter guards the write
+class ICICI {
+  #balance;
+  constructor(name, balance) { this.name = name; this.#balance = balance; }
+  getBalance() { return this.#balance; }
+  setBalance(balance, isCashier) {
+    if (isCashier) this.#balance = balance;
+    else console.log("Not allowed");      // validation on write
+  }
+}
+let acc = new ICICI("Pramod", 1000);
+acc.setBalance(10000000, false);  // Not allowed
+acc.setBalance(300000, true);     // ok — cashier
+```
+
+---
+
+## 📖 What's in Chapter 23 — Inheritance (Available Now)
+
+A child class `extends` a parent — reusing, adding, and overriding. `super()` calls the parent constructor; `super.method()` the parent's method.
+
+| File | Topic | What you'll learn |
+|------|-------|-------------------|
+| `183_Single_Inheritance.js` | `extends` | `LoginPage extends BasePage` — child reuses `open()`/`close()` |
+| `184_SI_Example.js` | `super()` | `super(name)` runs the parent constructor first |
+| `185_Single_Inheritance_Con.js` | Override | Child `setup()` replaces parent's |
+| `186_IQ.js` | `super.method()` | Call the parent's version, then add to it |
+| `187_IQ2.js` | Polymorphic loop | One array of subclasses, each `execute()` differs |
+| `188_REAL_PageObject_Model.js` | Real POM | `BasePage` → `Login`/`Dashboard`/`Cart`, each `verify()` |
+| `189_Multiple_Inheritance.js` | Not allowed | `extends A, B` is a `SyntaxError` in JS |
+| `190_Multiple_Level_Inheritance.js` | Multi-level | `BasePage` → `AuthPage` → `AdminPage` |
+| `191_Hierarchial_Inheritance.js` | Hierarchical | One parent, many children |
+
+**Concept:** Inheritance lets a child class `extends` a parent — reusing its fields/methods, adding its own, and optionally overriding. `super(...)` calls the parent constructor; `super.method()` calls the parent's method.
+
+**Why:** Shared behaviour lives once in a base class. Every Page Object inherits `open()`/`close()` from `BasePage` — write it once, reuse everywhere.
+
+**Q&A — why use this?**
+- **Q: `super()` vs `super.fn()`?** A: `super()` (in a constructor) runs the parent constructor. `super.fn()` calls the parent's method `fn` — used when you override but still want the parent's work.
+- **Q: Multiple inheritance?** A: JS forbids `extends A, B`. Use multi-level (`A → B → C`) or composition instead.
+- **Q: Override = lose the parent?** A: Only if you don't call `super.method()`. `186_IQ.js` calls `super.setup()` then adds extra steps.
+
+```mermaid
+classDiagram
+    BasePage <|-- LoginPage
+    BasePage <|-- DashboardPage
+    BasePage <|-- CartPage
+    BasePage : +open()
+    BasePage : +close()
+    LoginPage : +verify()
+    DashboardPage : +verify()
+    CartPage : +verify()
+```
+
+```js
+// 184_SI_Example.js — extends + super()
+class Animal {
+  constructor(name) { this.name = name; }
+  eat() { console.log(this.name + " is eating"); }
+}
+class Dog extends Animal {
+  constructor(name, breed) {
+    super(name);          // parent constructor first
+    this.breed = breed;
+  }
+  bark() { console.log(this.name + " is barking!"); }
+}
+const dog = new Dog("Rex", "Labrador");
+dog.eat();   // inherited
+dog.bark();  // own method
+
+// 186_IQ.js — override but keep parent via super.method()
+class UITest extends BaseTest {
+  setup() {
+    super.setup();                       // run parent's setup
+    console.log("UI: maximize window");  // then add to it
+  }
+}
+```
+
+---
+
+## 📖 What's in Chapter 24 — Polymorphism (Available Now)
+
+Same method name, different behaviour per class. Calling code stays identical.
+
+| File | Topic | What you'll learn |
+|------|-------|-------------------|
+| `192_Method_Overriding.js` | Method overriding | Same `setup()` name, subclass supplies its own body |
+
+**Concept:** Polymorphism = "many forms". The same method name (`setup()`, `execute()`, `verify()`) behaves differently depending on the object's actual class. Calling code stays identical.
+
+**Why:** Loop over a mixed list of objects and call one method — each does the right thing. No `if (type === ...)` ladders.
+
+**Q&A — why use this?**
+- **Q: Overriding vs overloading?** A: JS does **overriding** (child redefines a parent method). It has no true overloading (same name, different signatures) — last definition wins.
+- **Q: How is it "many forms"?** A: `test.execute()` runs unit, API, or E2E logic depending on which subclass `test` is — see `187_IQ2.js`.
+- **Q: Where in frameworks?** A: A runner loops `pages.forEach(p => p.verify())`; each Page Object's `verify()` runs its own checks (`188_REAL_PageObject_Model.js`).
+
+```js
+// 192_Method_Overriding.js — same name, different body
+class BaseTest {
+  setup() { console.log("Base: open browser"); }
+}
+class APIPage extends BaseTest {
+  setup() { console.log("APITest: open browser"); }  // overrides
+}
+new APIPage().setup();   // APITest: open browser
+```
+
+---
+
+## 📖 What's in Chapter 25 — OOP Interview Questions (Available Now)
+
+Four warm-up drills: `EX1` Bug class (fields + `display()`), `EX2` constructor default values, `EX3` `this` per object, `EX4` method chaining (`return this`).
+
+```js
+// EX4.js — return this enables chaining
+class Counter {
+  constructor() { this.count = 0; }
+  increment() { this.count++; return this; }   // hand back the object
+  display() { console.log("Count:", this.count); return this; }
+}
+new Counter().increment().increment().increment().display();  // Count: 3
+```
+
+### Run them
+
+```bash
+node chapter_22_Encapsulation/182_ECap_Bank.js          # guarded setter
+node chapter_23_Inheritance/186_IQ.js                   # super.method()
+node chapter_24_Polymorphism/192_Method_Overriding.js   # overriding
+node chapter_25_OOP_Interview_Questions/EX4.js          # method chaining
+```
+
+---
+
+## 📖 What's in Chapter 26 — TypeScript (Available Now)
+
+JavaScript with **types**. Annotate variables, parameters, and return values so the compiler catches mistakes *before* the test runs — no more `undefined is not a function` at runtime.
+
+| File | Topic | What you'll learn |
+|------|-------|-------------------|
+| `193_TS.js` | Plain JS (the "before") | Untyped `let` + `function add(a, b)` — nothing stops `add("1", 2)` |
+| `194_TS_HelloWorld.ts` | First types | `let x: string`, typed params `(a: number, b: number): number` |
+| `195_TS_Part1.ts` | `void` | A function that returns nothing |
+| `196_TS_Part2.ts` | Primitives + arrays | `string`/`number`/`boolean`/`null`, `number[]` vs `Array<string>`, `any` vs `unknown` |
+| `197_TS_Part2.ts` | Narrowing + shapes | `typeof` narrowing on `unknown`, arrow + inline object annotations |
+| `198_Part3.ts` | `void` vs `never` | `never` = throws or loops forever, no return |
+| `199_IQ.ts` / `200_IQ.ts` | Typed helpers | `string`/`number`/`boolean`/`void` fns, typed `number[]` filter |
+
+**Concept:** TypeScript = JavaScript + a type layer. You write `: type` annotations; `tsc` checks them and compiles to plain JS. Types vanish at runtime — they're a compile-time safety net.
+
+**Why:** Catch bugs at author time. A wrong argument type, a typo'd property, a missing return — all flagged in the editor instead of failing mid-test in CI.
+
+**Q&A — why use this?**
+- **Q: `any` vs `unknown`?** A: `any` switches off checking — anything goes. `unknown` is the safe version: you must narrow (`typeof x === "string"`) before using it. Prefer `unknown`.
+- **Q: `void` vs `never`?** A: `void` returns (just no useful value). `never` *never* returns — it throws or loops forever, so code after the call is unreachable.
+- **Q: How do I run a `.ts` file?** A: Node ≥ 22.18 runs it directly: `node file.ts`. Or `npx tsx file.ts`. Or compile with `npx tsc` then `node file.js`.
+
+```ts
+// 196_TS_Part2.ts — primitives, arrays, any vs unknown
+let age: number = 30;
+let numbers: number[] = [1, 2, 3];
+let names: Array<string> = ["John", "Jane"];
+let anything: any = "hello";       // unchecked — avoid
+let value: unknown = "hello";      // safe — must narrow before use
+
+// 198_Part3.ts — void vs never
+function sayHello(msg: string): void { console.log(msg); }       // returns nothing
+function throwError(message: string): never { throw new Error(message); } // never returns
+```
+
+### Run them
+
+```bash
+cd chapter_26_Typescript
+node 198_Part3.ts            # Node ≥ 22.18 runs .ts directly
+node 200_IQ.ts               # or: npx tsx 200_IQ.ts
+```
+
+---
+
+## 📖 What's in Chapter 27 — TypeScript Interfaces (Available Now)
+
+An **interface** names the shape of an object — which properties it must have and their types. The compiler then rejects any object that doesn't match.
+
+| File | Topic | What you'll learn |
+|------|-------|-------------------|
+| `201_IF.ts` | Interface basics | `interface TestCase { id: number; ... }` — objects must match exactly |
+| `202_IF_Part2.ts` | Optional `?` | `headers?: object` — property may be absent |
+| `203_IF_READONLY.ts` | `readonly` + optional | `readonly statusCode` can't be reassigned; `?` fields stay optional |
+| `204_IF_READOnly.ts` | readonly fields + arrays | `readonly x` and `readonly number[]` — frozen values |
+
+**Concept:** An interface is a contract for an object's structure. `?` marks a property optional; `readonly` blocks reassignment after creation.
+
+**Why:** API responses, test cases, configs all have a fixed shape. Declare it once as an interface and every object is checked against it — typos and missing fields fail at compile time.
+
+**Q&A — why use this?**
+- **Q: What does `?` do?** A: Makes a property optional — `response2` can include `headers`/`responseTime`, `response1` can omit them. Both satisfy the interface.
+- **Q: What does `readonly` protect?** A: Reassignment. `response.statusCode = 404` is a compile error; `response.body = "..."` (non-readonly) is fine.
+- **Q: Interface vs the inline `{ name: string }` from Ch 26?** A: Same idea — an interface is the **named, reusable** version you can apply to many objects.
+
+```ts
+// 203_IF_READONLY.ts — readonly + optional combined
+interface APIReponse {
+  readonly statusCode: number;   // can't reassign
+  body: string;
+  headers?: object;              // optional
+  responTime?: number;
+}
+let response: APIReponse = { statusCode: 200, body: '{"user": "admin"}' };
+// response.statusCode = 404;    // ❌ compile error — readonly
+response.body = "updated";        // ✅ allowed
+```
+
+### Run them
+
+```bash
+cd chapter_27_TypeScript_Interface
+node 201_IF.ts               # Node ≥ 22.18 runs .ts directly
+node 203_IF_READONLY.ts      # or: npx tsx 203_IF_READONLY.ts
 ```
 
 ---
@@ -4327,8 +4629,12 @@ graph TD
     subgraph next["Next Up — Playwright Basics"]
         N1[Ch 17: Promises ✅] --> N2[Ch 18: Async / Await ✅]
         N2 --> N3[Ch 19: Playwright Basics ✅]
-        N3 --> N4[Ch 20: OOP — Modules + Classes ✅]
-        N4 --> N5[Ch 21: Locators & POM]
+        N3 --> N4[Ch 20: Export / Import ✅]
+        N4 --> N5[Ch 21-24: OOP 4 Pillars ✅]
+        N5 --> N6[Ch 25: OOP Interview Qs ✅]
+        N6 --> N7[Ch 26: TypeScript ✅]
+        N7 --> N8[Ch 27: TS Interfaces ✅]
+        N8 --> N9[Ch 28: Locators & POM]
     end
 
     style next fill:#fff3e0,stroke:#e65100
@@ -4354,7 +4660,14 @@ graph TD
 - ✅ Chapter 17 — **Promises**: `new Promise` (resolve/reject), `.then`/`.catch`/`.finally`, chaining to flatten callback hell, `Promise.all` vs `allSettled`, IQ traps (`throw` in `.then`, settle order) (files `154`–`160`)
 - ✅ Chapter 18 — **Async / Await**: `async`/`await` as sugar over promises, `try/catch/finally` error handling, flat E2E awaits vs `.then()` chains, sequential vs parallel (`Promise.allSettled`), first real Playwright tests (files `161`–`167`)
 - ✅ Chapter 19 — **Playwright Basics**: first real PW project — `playwright.config.ts`, the built-in `page` fixture, `page.goto` + `toHaveTitle`, a `codegen`-recorded login flow (`fill`/`click`/`toBeVisible`/`toContainText`/`toMatchAriaSnapshot`)
-- ✅ Chapter 20 — **OOP Basics (Modules + Classes & Objects)**: Part 1 ES modules — named vs default exports, `import { x as alias }`, mixing default + named (`01_EXPORT_IMPORT/` + `ExplainDefault.md`); Part 2 classes & objects — blueprint/`new`/constructor/`this`, method vs function, `#private` fields, `static` class-level members (`02_CLASS_OBJECT/171`–`178`)
+- ✅ Chapter 20 — **Export / Import (ES modules)**: named vs default exports, `as` alias for name clashes, mixing default + named (`chapter_20_Export_Import/` + `ExplainDefault.md`)
+- ✅ Chapter 21 — **Classes & Objects**: `new`/constructor/`this`, method vs function, `#private` fields, `static` class-level members (files `171`–`178`)
+- ✅ Chapter 22 — **Encapsulation**: `#private` + getter/setter gates, validation-on-write guarded setters (files `179`–`182`)
+- ✅ Chapter 23 — **Inheritance**: `extends`, `super()`/`super.method()`, override, multi-level, hierarchical, real Page Object Model (files `183`–`191`)
+- ✅ Chapter 24 — **Polymorphism**: method overriding — same name, different body per class (file `192`)
+- ✅ Chapter 25 — **OOP Interview Questions**: fields + `display()`, constructor default values, `this` per object, method chaining `return this` (`EX1`–`EX4`)
+- ✅ Chapter 26 — **TypeScript**: type annotations, primitives, `number[]`/`Array<string>`, `any` vs `unknown` + narrowing, `void` vs `never`, typed helpers (files `193`–`200`) + root `tsconfig.json`
+- ✅ Chapter 27 — **TypeScript Interfaces**: object-shape contracts, optional `?` properties, `readonly` fields & `readonly` arrays (files `201`–`204`)
 - ✅ **Per-chapter README** — every chapter folder now has its own deep-dive README.md
 
 ---
